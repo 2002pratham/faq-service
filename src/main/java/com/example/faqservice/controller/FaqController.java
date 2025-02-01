@@ -15,6 +15,7 @@ public class FaqController {
     @Autowired
     private FaqService faqService;
 
+    // Fetching all FAQs and applying the selected language translation
     @GetMapping("/api/faqs")
     public List<FAQ> getAllFaqs(@RequestParam(value = "lang", defaultValue = "en") String lang) {
         return faqService.getAllFaqsByLanguage(lang);

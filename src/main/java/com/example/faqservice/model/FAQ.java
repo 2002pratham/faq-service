@@ -29,12 +29,36 @@ public class FAQ {
     @Column(columnDefinition = "TEXT")
     private String questionBn;  // Bengali
 
-    // Method to get translated question based on language
+    // Getter method for question
+    public String getQuestion() {
+        return question;
+    }
+
+    // Getter method for questionHi
+    public String getQuestionHi() {
+        return questionHi;
+    }
+
+    // Getter method for questionBn
+    public String getQuestionBn() {
+        return questionBn;
+    }
+
     public String getTranslatedQuestion(String lang) {
         return switch (lang.toLowerCase()) {
-            case "hi" -> questionHi != null ? questionHi : question;  // Fallback to English
+            case "hi" -> questionHi != null ? questionHi : question;
             case "bn" -> questionBn != null ? questionBn : question;
             default -> question;  // Default to English
         };
+    }
+
+    // Setter for questionHi
+    public void setQuestionHi(String questionHi) {
+        this.questionHi = questionHi;
+    }
+
+    // Setter for questionBn
+    public void setQuestionBn(String questionBn) {
+        this.questionBn = questionBn;
     }
 }
