@@ -1,64 +1,67 @@
 package com.example.faqservice.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "faqs")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class FAQ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "question")
     private String question;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "answer")
     private String answer;
 
-    // Translations for multilingual support
-    @Column(columnDefinition = "TEXT")
-    private String questionHi;  // Hindi
+    // Default constructor
+    public FAQ() {}
 
-    @Column(columnDefinition = "TEXT")
-    private String questionBn;  // Bengali
+    // Constructor with fields
+    public FAQ(String question, String answer) {
+        this.question = question;
+        this.answer = answer;
+    }
 
-    // Getter method for question
+    // Getter and setter methods
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getQuestion() {
         return question;
     }
 
-    // Getter method for questionHi
-    public String getQuestionHi() {
-        return questionHi;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    // Getter method for questionBn
-    public String getQuestionBn() {
-        return questionBn;
+    public String getAnswer() {
+        return answer;
     }
 
-    public String getTranslatedQuestion(String lang) {
-        return switch (lang.toLowerCase()) {
-            case "hi" -> questionHi != null ? questionHi : question;
-            case "bn" -> questionBn != null ? questionBn : question;
-            default -> question;  // Default to English
-        };
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    // Setter for questionHi
-    public void setQuestionHi(String questionHi) {
-        this.questionHi = questionHi;
-    }
-
-    // Setter for questionBn
-    public void setQuestionBn(String questionBn) {
-        this.questionBn = questionBn;
+    @Override
+    public String toString() {
+        return "FAQ{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
     }
 }
